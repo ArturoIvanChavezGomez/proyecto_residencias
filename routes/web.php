@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroupUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,9 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+Route::post('/student-group-register', [GroupUserController::class, 'store'])
+                ->middleware('auth')
+                ->name('student.group.register');
 
 require __DIR__.'/auth.php';

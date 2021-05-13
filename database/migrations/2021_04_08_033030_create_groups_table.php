@@ -14,11 +14,11 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
-            $table->id();
-            $table->string('group_code', 20)->unique;
-            $table->string('observations',1000);
-            $table->bigInteger('subject_id')->unsigned()->index()->nullable();
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->bigIncrements('id');
+            $table->string('group_code', 20)->unique();
+            $table->string('observations', 1000)->nullable();
+            $table->unsignedBigInteger('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
